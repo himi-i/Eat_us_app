@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,26 +26,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
-public class AddFridgeActivity extends AppCompatActivity {
+public class AddFridgeActivity extends AppCompatActivity{
     Button vdate_btn;
     Button category_btn;
     Button addsave_btn;
 
     DatePickerDialog datePickerDialog;
     TextView textView;
+    private ImageView selectedCategoryImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addfridge_main);
+
         vdate_btn = findViewById(R.id.vdate_btn);
         category_btn = findViewById(R.id.category_btn);
         addsave_btn = findViewById(R.id.addsave_btn);
+        selectedCategoryImage = findViewById(R.id.selectedCategoryImage);
 
         category_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showDialog();
             }
         });
@@ -51,10 +55,16 @@ public class AddFridgeActivity extends AppCompatActivity {
         addsave_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AddFridgeActivity.this, "저장이 완료되었습니다", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddFridgeActivity.this, "저장 완료", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+    private void updateSelectedCategoryImage(int drawableId){
+        selectedCategoryImage.setImageResource(drawableId);
+        selectedCategoryImage.setVisibility(View.VISIBLE);
+    }
+
     public void onClick(View view) {
                 final Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR);
@@ -76,31 +86,38 @@ public class AddFridgeActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.category_bottomsheet);
 
-        /*
         LinearLayout fish = dialog.findViewById(R.id.fish);
         LinearLayout nuts = dialog.findViewById(R.id.nuts);
         LinearLayout fruit = dialog.findViewById(R.id.fruit);
         LinearLayout sauce = dialog.findViewById(R.id.sauce);
         LinearLayout egg = dialog.findViewById(R.id.egg);
+        LinearLayout grain = dialog.findViewById(R.id.grain);
+        LinearLayout drink = dialog.findViewById(R.id.drink);
+        LinearLayout veggie = dialog.findViewById(R.id.veggie);
+        LinearLayout meat = dialog.findViewById(R.id.meat);
+        LinearLayout alcohol = dialog.findViewById(R.id.alcohol);
+        LinearLayout milk = dialog.findViewById(R.id.milk);
+        LinearLayout cheese = dialog.findViewById(R.id.cheese);
 
         fish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.fish);
                 dialog.dismiss();
-                Toast.makeText(AddFridgeActivity.this, "생선", Toast.LENGTH_SHORT).show();
             }
         });
         nuts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.nuts);
                 dialog.dismiss();
-                Toast.makeText(AddFridgeActivity.this, "견과류", Toast.LENGTH_SHORT).show();
             }
         });
 
         fruit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.fruit);
                 dialog.dismiss();
             }
         });
@@ -108,6 +125,7 @@ public class AddFridgeActivity extends AppCompatActivity {
         sauce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.sauce);
                 dialog.dismiss();
             }
         });
@@ -115,10 +133,65 @@ public class AddFridgeActivity extends AppCompatActivity {
         egg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.egg);
                 dialog.dismiss();
             }
         });
-         */
+
+        grain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.grain);
+                dialog.dismiss();
+            }
+        });
+
+        drink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.drink);
+                dialog.dismiss();
+            }
+        });
+
+        veggie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.veggie);
+                dialog.dismiss();
+            }
+        });
+
+        meat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.meat);
+                dialog.dismiss();
+            }
+        });
+
+        alcohol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.alcohol);
+                dialog.dismiss();
+            }
+        });
+
+        milk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.milk);
+                dialog.dismiss();
+            }
+        });
+        cheese.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSelectedCategoryImage(R.drawable.cheese);
+                dialog.dismiss();
+            }
+        });
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
