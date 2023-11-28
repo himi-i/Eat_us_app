@@ -36,14 +36,24 @@
             android:textColor="@color/black"
             android:text="@string/category" />
 
-        <Button
-            android:id="@+id/category_btn"
+        <ImageView
+            android:id="@+id/selectedCategoryImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxWidth="70dp"
+            android:maxHeight="70dp"
+            android:adjustViewBounds="true"
+            android:visibility="gone"
+            />
+
+        <Button
+            android:id="@+id/category_btn"
+            android:layout_width="180dp"
+            android:layout_height="30dp"
             android:hint="@string/category_btn"
-            android:layout_below="@id/category"
+            android:layout_below="@id/selectedCategoryImage"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorCategoryButton"
+            android:background="@drawable/layout_categorybtn"
             />
 
         <TextView
@@ -75,8 +85,8 @@
 
         <Button
             android:id="@+id/vdate_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
             android:layout_below="@id/vdate"
             android:text="@string/vdate_btn"
             android:onClick="onClick"
@@ -95,7 +105,7 @@
             android:id="@+id/memoinput"
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:hint="메모하세요."
+            android:hint="@string/memo"
             android:layout_below="@id/memo"
             android:background="@drawable/layout_edittext"
             android:gravity="start|top"
@@ -103,9 +113,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <Button
                 android:id="@+id/addsave_btn"
                 android:layout_width="wrap_content"
@@ -113,8 +122,8 @@
                 android:layout_weight="1"
                 android:text="@string/save_btn"
                 android:textColor="@color/white"
-                android:background="@color/colorSaveButton"/>
-
+                android:background="@drawable/layout_savebtn"
+                />
         </LinearLayout>
 
     </LinearLayout>

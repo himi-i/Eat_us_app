@@ -32,5 +32,4 @@
         <activity android:name=".FreezerActivity"
             android:label = "나의 냉동고"/>
     </application>
-
 </manifest>
