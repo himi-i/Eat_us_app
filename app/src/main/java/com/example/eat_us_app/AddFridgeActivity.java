@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridLayout;
@@ -33,6 +34,7 @@ public class AddFridgeActivity extends AppCompatActivity{
 
     DatePickerDialog datePickerDialog;
     TextView textView;
+    public String vdate;
     private ImageView selectedCategoryImage;
 
     @Override
@@ -55,9 +57,41 @@ public class AddFridgeActivity extends AppCompatActivity{
         addsave_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(AddFridgeActivity.this, "저장 완료", Toast.LENGTH_SHORT).show();
+                showSaveToast();
             }
         });
+    }
+
+    public void showSaveToast(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.save_toast_layout);
+
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = 800;
+        params.height = 1000;
+        dialog.getWindow().setAttributes(params);
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Button goFridge_btn = dialog.findViewById(R.id.goFridge_btn);
+        goFridge_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(), FridgeActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button goBack_btn = dialog.findViewById(R.id.goBack_btn);
+        goBack_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(R.drawable.layout_toast);
     }
 
     private void updateSelectedCategoryImage(int drawableId){
@@ -76,6 +110,7 @@ public class AddFridgeActivity extends AppCompatActivity{
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
                                 vdate_btn.setText(year + "-" + (month + 1) + "-" + dayofMonth);
+                                vdate = year + "-" + (month + 1) + "-" + dayofMonth;
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
