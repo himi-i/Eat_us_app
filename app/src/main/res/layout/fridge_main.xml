@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAppBackground">
@@ -16,10 +17,20 @@
             android:layout_height="wrap_content"
             android:text="@string/addfridge_btn" />
 
+        <EditText
+            android:id="@+id/searchItem"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="찾고싶은 식자재를 검색해보세요!"
+            android:inputType="text" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/fridgeRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:scrollbars="vertical"/>
 
     </LinearLayout>
 
