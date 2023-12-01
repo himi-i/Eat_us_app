@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나만의 레시피 제목을 입력해보세요"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/how2make"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나만의 레시피를 입력해보세요!"
+        android:textSize="13dp"/>
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+</LinearLayout>
