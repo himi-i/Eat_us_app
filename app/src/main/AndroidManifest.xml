@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eat_us_app"
         tools:targetApi="31">
+        <!-- FCM 서비스 등록 -->
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
