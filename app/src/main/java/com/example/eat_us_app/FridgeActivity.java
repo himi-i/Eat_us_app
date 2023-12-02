@@ -2,68 +2,80 @@ package com.example.eat_us_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class FridgeActivity extends AppCompatActivity {
-    private ArrayList<Item> itemList = new ArrayList<>();
     private RecyclerView fridgeRecyclerView;
     private RecyclerViewAdapter fridgeAdapter;
+    private ArrayList<FridgeItem> fridgeItemList;
     Button addfridge_btn;
+    private static final int ADD_FRIDGE_REQUEST = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fridge_main);
 
+        fridgeItemList = new ArrayList<>();
+        fridgeAdapter = new RecyclerViewAdapter(fridgeItemList);
+
+        fridgeRecyclerView = findViewById(R.id.fridgeRecyclerView);
+        fridgeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        fridgeRecyclerView.setAdapter(fridgeAdapter);
+
         addfridge_btn = findViewById(R.id.addfridge_btn);
         addfridge_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), AddFridgeActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ADD_FRIDGE_REQUEST);
             }
         });
-        /*
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter(itemList);
-        recyclerView.setAdapter(adapter);
 
-        EditText editTextName = findViewById(R.id.editTextName);
-        EditText editTextQuantity = findViewById(R.id.editTextQuantity);
-        EditText editTextExpirationDate = findViewById(R.id.editTextExpirationDate);
-        Button buttonSave = findViewById(R.id.buttonSave);
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
+        EditText searchItem = findViewById(R.id.searchItem);
+        searchItem.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                String name = editTextName.getText().toString();
-                int quantity = Integer.parseInt(editTextQuantity.getText().toString());
-                String expirationDate = editTextExpirationDate.getText().toString();
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                // Add item to list and notify adapter
-                itemList.add(new Item(name, quantity, expirationDate));
-                adapter.notifyDataSetChanged();
-
-                // Clear input fields
-                editTextName.setText("");
-                editTextQuantity.setText("");
-                editTextExpirationDate.setText("");
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (fridgeAdapter != null) {
+                    fridgeAdapter.filter(charSequence.toString());
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
             }
         });
-    } */
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ADD_FRIDGE_REQUEST && resultCode == RESULT_OK) {
+            FridgeItem newItem = data.getParcelableExtra("FRIDGE_ITEM");
+            if (newItem != null) {
+                fridgeItemList.add(newItem);
+                fridgeAdapter.notifyDataSetChanged();
+            }
+        }
     }
 }
 

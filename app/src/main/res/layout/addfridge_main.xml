@@ -5,12 +5,15 @@
     android:layout_height="match_parent"
     android:background="@color/colorAppBackground">
 
+    <include layout="@layout/toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation = "vertical"
-        android:padding="20dp">
+        android:layout_marginTop="40dp"
+        android:padding="25dp">
 
         <TextView
             android:id="@+id/name"
@@ -23,12 +26,13 @@
         <EditText
             android:id="@+id/nameinput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/nameinput"
+            android:layout_height="30dp"
+            android:textSize="15sp"
             android:layout_below="@id/name"
-            android:inputType="textPersonName"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/layout_edittext"/>
+            android:background="@drawable/layout_edittext"
+            android:hint="@string/nameinput"
+            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/category"
@@ -68,9 +72,9 @@
 
         <EditText
             android:id="@+id/numinput"
-            android:layout_width="30dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:hint="0"
+            android:hint="  0"
             android:layout_below="@id/num"
             android:background="@drawable/layout_edittext"
             android:inputType="number"
@@ -105,7 +109,7 @@
         <EditText
             android:id="@+id/memoinput"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="180dp"
             android:hint="@string/memo"
             android:layout_below="@id/memo"
             android:background="@drawable/layout_edittext"

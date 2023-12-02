@@ -11,19 +11,21 @@
         android:layout_gravity="center"
         android:orientation = "vertical">
 
-        <Button
-            android:id="@+id/addfridge_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/addfridge_btn" />
+        <include
+            layout="@layout/toolbar" />
 
         <EditText
             android:id="@+id/searchItem"
             android:layout_width="365dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:hint="찾고싶은 식자재를 검색해보세요!"
-            android:inputType="text" />
+            android:hint="식재료 이름을 검색해주세요!"/>
+
+        <Button
+            android:id="@+id/addfridge_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addfridge_btn" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fridgeRecyclerView"

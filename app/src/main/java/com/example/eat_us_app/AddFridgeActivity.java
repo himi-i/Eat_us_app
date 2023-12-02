@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -15,13 +13,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.GridLayout;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +32,7 @@ public class AddFridgeActivity extends AppCompatActivity{
     TextView textView;
     public String vdate;
     private ImageView selectedCategoryImage;
+    private int selectedImageResourceId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +54,7 @@ public class AddFridgeActivity extends AppCompatActivity{
         addsave_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveItem();
                 showSaveToast();
             }
         });
@@ -79,14 +77,14 @@ public class AddFridgeActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                Intent intent = new Intent(getApplicationContext(), FridgeActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
         Button goBack_btn = dialog.findViewById(R.id.goBack_btn);
         goBack_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 dialog.dismiss();
             }
         });
@@ -97,6 +95,7 @@ public class AddFridgeActivity extends AppCompatActivity{
     private void updateSelectedCategoryImage(int drawableId){
         selectedCategoryImage.setImageResource(drawableId);
         selectedCategoryImage.setVisibility(View.VISIBLE);
+        selectedImageResourceId = drawableId;
     }
 
     public void onClick(View view) {
@@ -233,5 +232,29 @@ public class AddFridgeActivity extends AppCompatActivity{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
+
+    private void saveItem(){
+        EditText nameInput = findViewById(R.id.nameinput);
+        EditText numInput = findViewById(R.id.numinput);
+        EditText memoInput = findViewById(R.id.memoinput);
+        int quantity;
+        try {
+            quantity = Integer.parseInt(numInput.getText().toString());
+        } catch (NumberFormatException e) {
+            quantity = 0;
+        }
+
+        FridgeItem newItem = new FridgeItem(
+                selectedImageResourceId,
+                nameInput.getText().toString(),
+                quantity,
+                vdate,
+                memoInput.getText().toString()
+        );
+
+        Intent returnIntent = new Intent(getApplicationContext(), FridgeActivity.class);
+        returnIntent.putExtra("FRIDGE_ITEM", newItem);
+        setResult(RESULT_OK, returnIntent);
     }
 }
