@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 갤러리 내부 저장소 접근 권한 추가. -->
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,14 +20,36 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER"> </category>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity android:name=".put_recipe"
+            android:exported="true"/>
+
+
+
+        <activity android:name=".Recipe"
+            android:exported="true"/>
+        <activity android:name=".Recipe_list"
+            android:exported="true"/>
+
+<!--
+        <activity android:name=".FridgeActivity"
+
+            android:label = "나의 냉장고"/>
+        <activity android:name=".AddFridgeActivity"
+            android:label = "냉장고 채우기"/>
+        <activity android:name=".FreezerActivity"
+            android:label = "나의 냉동고"/>
+        -->
+
     </application>
+
 
 </manifest>
