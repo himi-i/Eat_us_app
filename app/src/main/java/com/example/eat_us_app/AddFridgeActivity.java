@@ -71,7 +71,7 @@ public class AddFridgeActivity extends AppCompatActivity{
 
                 // [알람]: 3일 전으로 설정
                 alarmDate.add(Calendar.DATE, -3);
-                // [알람]: 10초 정도 뒤로 설정
+                // [알람]: 10초 정도 뒤로 설정 ===
                 alarmDate.add(Calendar.SECOND, 10);
 
                 // [알람]: 알람을 실행해주는 메소드
