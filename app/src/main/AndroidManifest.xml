@@ -31,5 +31,6 @@
             android:label = "냉장고 채우기"/>
         <activity android:name=".FreezerActivity"
             android:label = "나의 냉동고"/>
+        <receiver android:name=".AlertReceiver"/>
     </application>
 </manifest>
