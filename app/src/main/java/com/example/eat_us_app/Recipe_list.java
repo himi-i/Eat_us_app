@@ -2,6 +2,7 @@ package com.example.eat_us_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,8 +11,8 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,17 +23,22 @@ public class Recipe_list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_list);
 
-        String[] data = {"Recipe 1", "Recipe 2", "Recipe 3"};
-        List<String> recipeList = new ArrayList<>(Arrays.asList(data));
+        /* 툴바 설정
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setTitle("닫기");
+        */
 
-        // 어댑터 생성
+
+        String[] data = {"chicken salad", "salmon salad", "kimchi fried rice"};
+        List<String> recipeList = Arrays.asList(data);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeList);
 
-        // ListView 찾아와서 어댑터 설정
         ListView listView = findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
-        // 리스트뷰 아이템 클릭 시 이벤트 처리
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -44,7 +50,7 @@ public class Recipe_list extends AppCompatActivity {
             }
         });
 
-        // SearchView 찾아오기
+        // 검색
         SearchView searchView = findViewById(R.id.searchViews);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -62,9 +68,9 @@ public class Recipe_list extends AppCompatActivity {
         });
 
         Button button = findViewById(R.id.plus_button);
-        button.setOnClickListener(new View.OnClickListener(){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent;
                 intent = new Intent(Recipe_list.this, put_recipe.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -72,4 +78,18 @@ public class Recipe_list extends AppCompatActivity {
             }
         });
     }
+    /* 툴바 설정
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    */
 }
+
+

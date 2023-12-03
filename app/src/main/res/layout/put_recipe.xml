@@ -1,28 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    tools:context=".put_recipe">
 
-    <TextView
-        android:id="@+id/topic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="나만의 레시피 제목을 입력해보세요"
-        android:textSize="13dp" />
-
-    <TextView
-        android:id="@+id/how2make"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="나만의 레시피를 입력해보세요!"
-        android:textSize="13dp"/>
-
-    <ImageView
-        android:id="@+id/photo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/plus1"
+            android:onClick="onImageViewClick" />
+
+        <EditText
+            android:id="@+id/recipe_topic"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="나만의 레시피 제목을 입력해보세요!"
+            android:layout_below="@id/recipe_topic"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/recipe"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:hint="@string/recipe"
+            android:layout_below="@id/recipe"
+            android:gravity="start|top"
+            android:layout_marginBottom="15dp"/>
+
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="완료"/>
+    </LinearLayout>
+
+</ScrollView>
