@@ -1,7 +1,10 @@
 package com.example.eat_us_app;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -35,6 +38,7 @@ public class AddFridgeActivity extends AppCompatActivity{
     public String vdate;
     private ImageView selectedCategoryImage;
     private int selectedImageResourceId;
+    int alarmYear, alarmMonth, alarmDay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,10 +70,39 @@ public class AddFridgeActivity extends AppCompatActivity{
         addsave_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 알람 코드 오류 존재함
+                /*
+                // [알람]: 알람을 설정해주는 변수
+                final Calendar alarmDate = Calendar.getInstance();
+
+                // [알람]: 캘린더 시간으로 알람 설정
+                alarmDate.set(Calendar.YEAR, alarmYear);
+                alarmDate.set(Calendar.MONTH, alarmMonth);
+                alarmDate.set(Calendar.DAY_OF_MONTH, alarmDay);
+
+                // [알람]: 3일 전으로 설정
+                alarmDate.add(Calendar.DATE, -3);
+                // [알람]: 10초 정도 뒤로 설정 ===
+                alarmDate.add(Calendar.SECOND, 10);
+
+                // [알람]: 알람을 실행해주는 메소드
+                startAlarm(alarmDate); */
                 saveItem();
                 showSaveToast();
             }
         });
+    }
+
+    private void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE, 1);
+        }
+        //RTC_WAKE : 지정된 시간에 기기의 절전 모드를 해제하여 대기 중인 인텐트를 실행
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     @Override
@@ -135,7 +168,9 @@ public class AddFridgeActivity extends AppCompatActivity{
                             @Override
                             public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
                                 vdate_btn.setText(year + "-" + (month + 1) + "-" + dayofMonth);
-                                vdate = year + "-" + (month + 1) + "-" + dayofMonth;
+                                alarmYear =year;
+                                alarmMonth =month;
+                                alarmDay =dayofMonth;
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();

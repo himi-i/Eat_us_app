@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -29,5 +32,9 @@
         <activity android:name=".FreezerActivity" />
         <activity android:name=".AddFridgeActivity" />
         <activity android:name=".AddFreezerActivity" />
+        <activity android:name=".Recipe_list"/>
+        <activity android:name=".Put_Recipe"/>
+        <activity android:name=".Recipe"/>
+        <receiver android:name=".AlertReceiver"/>
     </application>
 </manifest>
