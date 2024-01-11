@@ -10,9 +10,4 @@
         android:icon="@drawable/cheese"
         android:enabled="true"
         android:title="레시피" />
-    <item
-        android:id="@+id/navigation_setting"
-        android:icon="@drawable/alcohol"
-        android:enabled="true"
-        android:title="설정" />
 </menu>
